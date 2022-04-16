@@ -2,6 +2,7 @@ import requests
 import os
 from requests.structures import CaseInsensitiveDict
 import json
+import matplotlib.pyplot as plt
 
 def connect_to_endpoint(url):
     headers = CaseInsensitiveDict()
@@ -29,9 +30,6 @@ def connect_to_endpoint(url):
                 response.status_code, response.text
             )
         )
-    file1 = open("myfile.txt", 'w')
-    file1.write(response.text)
-    file1.close()
     return response.json()
 
 def get_following_url(userid, cursor = None):    
@@ -61,10 +59,13 @@ def processResponse(json_response):
                 cursor = content["value"]
             continue
         user = content["itemContent"]["user_results"]["result"]
+        if "rest_id" not in user:
+            print(user)
+            continue
         id = user["rest_id"]
         follower_count = user["legacy"]["followers_count"]
         name = user["legacy"]["name"]
-        ids.append((follower_count,name,id))
+        ids.append((str(follower_count),name,id))
     
     return (ids, cursor, stop)
     
@@ -87,11 +88,25 @@ def get_following_ids(userid):
     
     return sorted(ids_total)    
 
-
-def main():
-    userid = "2267107398" #gopal
+def plot_bar_chart():
+    userid = "2178012643" #balaji
     ids = get_following_ids(userid)
     print(ids, len(ids))
+    counts = [0] * 9
+    for fc, name, id in ids:
+        ind = ord(fc[0]) - ord('1')
+        counts[ind] += 1
+
+    print(counts)
+
+    x = [i for i in range(1,10)]
+    y = counts
+
+    plt.bar(x, y)
+    plt.show()
+
+def main():
+    plot_bar_chart()
 
 
 if __name__ == "__main__":

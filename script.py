@@ -38,6 +38,12 @@ def get_following_url(userid, cursor = None):
     else:
         return 'https://twitter.com/i/api/graphql/aH-mD-8F2mwJpQLegEDaWw/Following?variables={"userId":"' + userid + '","count":200,"includePromotedContent":false,"withSuperFollowsUserFields":true,"withDownvotePerspective":false,"withReactionsMetadata":false,"withReactionsPerspective":false,"withSuperFollowsTweetFields":true,"__fs_dont_mention_me_view_api_enabled":true,"__fs_interactive_text_enabled":true,"__fs_responsive_web_uc_gql_enabled":false}'
 
+def get_tweets_url(cursor = None):
+    if cursor:
+        return 'https://twitter.com/i/api/graphql/xV-_tjFDYxtd6kmroDuG7w/UserTweets?variables={"userId":"2267107398","count":40,"cursor":"' + cursor + '","includePromotedContent":true,"withQuickPromoteEligibilityTweetFields":true,"withSuperFollowsUserFields":true,"withDownvotePerspective":false,"withReactionsMetadata":false,"withReactionsPerspective":false,"withSuperFollowsTweetFields":true,"withVoice":true,"withV2Timeline":true,"__fs_responsive_web_like_by_author_enabled":false,"__fs_dont_mention_me_view_api_enabled":true,"__fs_interactive_text_enabled":true,"__fs_responsive_web_uc_gql_enabled":false,"__fs_responsive_web_edit_tweet_api_enabled":false}'
+    else:
+        return 'https://twitter.com/i/api/graphql/xV-_tjFDYxtd6kmroDuG7w/UserTweets?variables={"userId":"2267107398","count":40,"includePromotedContent":true,"withQuickPromoteEligibilityTweetFields":true,"withSuperFollowsUserFields":true,"withDownvotePerspective":false,"withReactionsMetadata":false,"withReactionsPerspective":false,"withSuperFollowsTweetFields":true,"withVoice":true,"withV2Timeline":true,"__fs_responsive_web_like_by_author_enabled":false,"__fs_dont_mention_me_view_api_enabled":true,"__fs_interactive_text_enabled":true,"__fs_responsive_web_uc_gql_enabled":false,"__fs_responsive_web_edit_tweet_api_enabled":false}'
+
 
 def processResponse(json_response):
     instructions = json_response["data"]["user"]["result"]["timeline"]["timeline"]["instructions"]
@@ -86,7 +92,53 @@ def get_following_ids(userid):
 
     print("Total: ", len(ids_total))
     
-    return sorted(ids_total)    
+    return sorted(ids_total)  
+
+def process_tweets_response(json_response):
+    instructions = json_response["data"]["user"]["result"]["timeline_v2"]["timeline"]["instructions"]
+    data = None
+    stop = False
+    cursor = None
+    ids = []
+    f = open("ids.txt", 'a')
+
+    for i in instructions:
+        if i["type"] == "TimelineAddEntries":
+            data = i["entries"]
+        if i["type"] == "TimelineTerminateTimeline" and i["direction"] == "Bottom":
+            stop = True
+    
+    for item in data:
+        content = item["content"]
+        if "itemContent" not in content:
+            if item["entryId"].startswith("cursor-bottom"):
+                cursor = content["value"]
+            continue
+        user = content["itemContent"]["tweet_results"]["result"]
+        if "rest_id" not in user:
+            print(user)
+            continue
+        id = user["rest_id"]
+        f.write(id)
+        f.write("\n")
+        ids.append(id)
+
+    f.close()
+    return (ids, cursor, stop)
+
+def get_tweets(cursor=None):
+    tweet_ids = []
+    stop = False
+    while not stop:
+        url = get_tweets_url(cursor)
+        json_response = connect_to_endpoint(url)
+        ids, cursor, stop = process_tweets_response(json_response)
+        tweet_ids += ids
+        print(len(ids), len(tweet_ids))
+
+    print("Total: ", len(tweet_ids))
+
+    return tweet_ids
 
 def plot_bar_chart():
     userid = "2178012643" #balaji
@@ -106,7 +158,8 @@ def plot_bar_chart():
     plt.show()
 
 def main():
-    plot_bar_chart()
+    # plot_bar_chart()
+    # print(get_tweets("HBaAgLfN1pmrySUAAA=="))
 
 
 if __name__ == "__main__":

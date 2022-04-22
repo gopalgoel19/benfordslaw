@@ -10,18 +10,21 @@ def connect_to_endpoint(url):
     headers["accept"] = "*/*"
     headers["accept-language"] = "en-US,en;q=0.9"
     headers["authorization"] = "Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs%3D1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA"
+    headers["cache-control"] = "no-cache"
     headers["content-type"] = "application/json"
-    headers["cookie"] = 'guest_id_marketing=v1%3A164669839006955000; guest_id_ads=v1%3A164669839006955000; kdt=bJhJox5mrrrW9YL31dig3hjZzwtYxMNtt3gWz9Kh; dnt=1; lang=en; at_check=true; des_opt_in=Y; ads_prefs="HBISAAA="; auth_multi="2267107398:ea358fb90f14c99304a149ddac00852753045188"; auth_token=c274a2446f16c8d61dad57c023deb867d3f4fcf5; personalization_id="v1_9jLSqtshjUAHvNtxOiXxXQ=="; guest_id=v1%3A164998183114759413; twid=u%3D1476707953906536449; ct0=e45ee8be21a4cf7ef219330c409e226f73805a8e4c9cf769dbc66dab4c5993b575b07b833f32695130b92d888b16d47f729c204f91597e008fa4f9cdcf018a2ff00d3708aaaf4f6ec8d575a1d9c7f459; _twitter_sess=BAh7CCIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo%250ASGFzaHsABjoKQHVzZWR7ADofbGFzdF9wYXNzd29yZF9jb25maXJtYXRpb24i%250AFTE2NDk5ODE4NDI2ODMwMDA6HnBhc3N3b3JkX2NvbmZpcm1hdGlvbl91aWQi%250AGDE0NzY3MDc5NTM5MDY1MzY0NDk%253D--e53384759fe1544e9f88448e8673fd59bfdf2af5; mbox=PC#5a3221c3daf94883a14095c1b9f300e7.34_0#1713230769|session#13bc083cb00d4690b5be5e0570150820#1649987829'
-    headers["referer"] = "https://twitter.com/akshaybd/followers"
+    headers["cookie"] = 'guest_id_marketing=v1%3A164669839006955000; guest_id_ads=v1%3A164669839006955000; kdt=bJhJox5mrrrW9YL31dig3hjZzwtYxMNtt3gWz9Kh; dnt=1; lang=en; at_check=true; des_opt_in=Y; _sl=1; personalization_id="v1_+Ne/LiItHdp0/OBMp52W1A=="; guest_id=v1%3A165057133129728834; auth_token=3ca0a47281df2185e772263255960f7fb7bc068c; ct0=f22f1f6bb7d28686f7efdb86fb2291a811952d0dd277c2aee99f03f4d22a784fd6794c0915cf096eab2318805016d0e92afc00008260973afdf53539ec6f968715c4f5f14f4d187066139bbe3feff638; twid=u%3D1517233098756292608; mbox=PC#5a3221c3daf94883a14095c1b9f300e7.34_0#1713816525|session#45917ba21b024a1d8dcfe9624aca01a8#1650573585; external_referer=padhuUp37ziAYt49cfJv%2FPYan957PLwSgO%2FWRGmTwuk%3D|0|8e8t2xd8A2w%3D; att=1-NoMRunwPZngP9JGhx4XPbKnGqjGmCC8jbu16LvGU; _twitter_sess=BAh7CyIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo%250ASGFzaHsABjoKQHVzZWR7ADofbGFzdF9wYXNzd29yZF9jb25maXJtYXRpb24i%250AFTE2NTA1NzE1NzM3NDcwMDA6HnBhc3N3b3JkX2NvbmZpcm1hdGlvbl91aWQi%250AGDE1MTcyMzMwOTg3NTYyOTI2MDg6B2lkIiVmYzk3NTBkMTE3N2QwYzkwOWZh%250AYjVlOGU3MjNjZjA4ZjoPY3JlYXRlZF9hdGwrCEEm106AAToMY3NyZl9pZCIl%250AYWU5NDgxZjVhZmRjYzc4ZGM3MmNlYWIyMTRmYTMyMGU%253D--8ab3656446a514918c19348d241f02c4661b70f6'
+    headers["pragma"] = "no-cache"
+    headers["referer"] = "https://twitter.com/jadacryptoguy/following"
     headers["sec-fetch-dest"] = "empty"
     headers["sec-fetch-mode"] = "cors"
     headers["sec-fetch-site"] = "same-origin"
     headers["sec-gpc"] = "1"
-    headers["user-agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.79 Safari/537.36"
-    headers["x-csrf-token"] = "e45ee8be21a4cf7ef219330c409e226f73805a8e4c9cf769dbc66dab4c5993b575b07b833f32695130b92d888b16d47f729c204f91597e008fa4f9cdcf018a2ff00d3708aaaf4f6ec8d575a1d9c7f459"
+    headers["user-agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36"
+    headers["x-csrf-token"] = "f22f1f6bb7d28686f7efdb86fb2291a811952d0dd277c2aee99f03f4d22a784fd6794c0915cf096eab2318805016d0e92afc00008260973afdf53539ec6f968715c4f5f14f4d187066139bbe3feff638"
     headers["x-twitter-active-user"] = "yes"
     headers["x-twitter-auth-type"] = "OAuth2Session"
     headers["x-twitter-client-language"] = "en"
+
     response = requests.get(url, headers=headers)
     print(response.status_code, url[:200])
     if response.status_code != 200:
@@ -158,9 +161,7 @@ def plot_bar_chart():
     plt.show()
 
 def main():
-    # plot_bar_chart()
-    # print(get_tweets("HBaAgLfN1pmrySUAAA=="))
-
+    plot_bar_chart()
 
 if __name__ == "__main__":
     main()
